@@ -1,0 +1,15 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "plugins": ["jest"],
+  "rules": {
+    "import/order": "error"
+  }
+}

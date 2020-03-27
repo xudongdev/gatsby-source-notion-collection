@@ -1,0 +1,85 @@
+{
+  "name": "gatsby-source-notion-collection",
+  "version": "0.0.0-development",
+  "description": "",
+  "keywords": [
+    "gatsby",
+    "notion"
+  ],
+  "author": {
+    "name": "Xudong Huang",
+    "email": "me@xudong.dev",
+    "url": "https://www.xudong.dev/"
+  },
+  "bugs": "https://github.com/xudongdev/gatsby-source-notion-collection/issues",
+  "homepage": "https://github.com/xudongdev/gatsby-source-notion-collection#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xudongdev/gatsby-source-notion-collection.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "lint": "eslint **/**.js",
+    "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bluebird": "^3.7.2",
+    "fs-extra": "^9.0.0",
+    "lodash": "^4.17.15",
+    "remark-html": "^11.0.1",
+    "remark-stringify": "^7.0.4",
+    "unified": "^8.4.2"
+  },
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "semantic-release": "^17.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "*.{json,js,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/github",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true
+        }
+      ]
+    ]
+  }
+}
