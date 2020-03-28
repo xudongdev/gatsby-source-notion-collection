@@ -11,7 +11,7 @@ const remarkProcessor = unified()
 const prismProcessor = unified()
   .data("settings", { fragment: true })
   .use(rehypeParse)
-  .use(rehypePrism)
+  .use(rehypePrism, { ignoreMissing: true })
   .use(rehypeStringify);
 
 module.exports = (mdast) =>
