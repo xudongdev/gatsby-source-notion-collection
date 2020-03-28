@@ -31,7 +31,10 @@
     "bluebird": "^3.7.2",
     "fs-extra": "^9.0.0",
     "lodash": "^4.17.15",
+    "rehype-parse": "^6.0.2",
+    "rehype-stringify": "^6.0.1",
     "remark-html": "^11.0.1",
+    "remark-rehype": "^6.0.0",
     "remark-stringify": "^7.0.4",
     "unified": "^8.4.2"
   },
