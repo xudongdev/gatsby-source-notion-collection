@@ -36,7 +36,7 @@
     "remark-html": "^11.0.1",
     "remark-rehype": "^6.0.0",
     "remark-stringify": "^7.0.4",
-    "unified": "^8.4.2"
+    "unified": "^9.0.0"
   },
   "devDependencies": {
     "commitizen": "^4.0.3",
