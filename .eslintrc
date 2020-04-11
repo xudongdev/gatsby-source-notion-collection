@@ -7,7 +7,11 @@
   "parserOptions": {
     "ecmaVersion": 2020
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": [
+    "standard",
+    "plugin:prettier/recommended",
+    "prettier/standard"
+  ],
   "plugins": ["jest"],
   "rules": {
     "import/order": "error"

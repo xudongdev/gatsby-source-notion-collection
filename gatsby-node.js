@@ -1,14 +1,12 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
-const path = require("path");
 const { Promise } = require("bluebird");
-const fs = require("fs-extra");
 const Notion = require("./lib/Notion");
 const packageVersion = require("./package").version;
 
 exports.sourceNodes = async (
-  { actions: { createNode }, createContentDigest },
-  { collectionId, collectionViewId, concurrency = 5, token, type = "Post" }
+  { actions: { createNode }, cache, createContentDigest },
+  { collectionId, collectionViewId, concurrency = 10, token, type = "Post" }
 ) => {
   const notion = new Notion({ token });
 
@@ -17,23 +15,15 @@ exports.sourceNodes = async (
   await Promise.map(
     pages,
     async ({ id, version }) => {
-      let page;
-      const cachePath = path.join(process.cwd(), `.cache/notion/${id}.json`);
+      let page = await cache.get(id);
 
-      if (await fs.exists(cachePath)) {
-        const cache = require(cachePath);
-
-        if (
-          version === cache.version &&
-          packageVersion === cache.packageVersion
-        ) {
-          page = cache;
-        }
+      if (
+        !page ||
+        page.version !== version ||
+        page.packageVersion !== packageVersion
+      ) {
+        page = await notion.getPage(id);
       }
-
-      page = await notion.getPage(id);
-
-      await fs.outputFile(cachePath, JSON.stringify(page, null, 2));
 
       createNode({
         ...page,
