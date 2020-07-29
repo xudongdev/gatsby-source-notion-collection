@@ -6,11 +6,19 @@ const packageVersion = require("./package").version;
 
 exports.sourceNodes = async (
   { actions: { createNode }, cache, createContentDigest },
-  { collectionId, collectionViewId, concurrency = 10, token, type = "Post" }
+  {
+    collectionId,
+    collectionViewId,
+    concurrency = 10,
+    token,
+    type = "Post",
+    properties = {},
+  }
 ) => {
-  const notion = new Notion({ token });
+  const notion = new Notion({ token, properties });
 
-  const { pages } = await notion.getCollection(collectionId, collectionViewId);
+  const collection = await notion.getCollection(collectionId, collectionViewId);
+  const pages = await collection.getPages();
 
   await Promise.map(
     pages,
@@ -22,7 +30,7 @@ exports.sourceNodes = async (
         page.version !== version ||
         page.packageVersion !== packageVersion
       ) {
-        page = await notion.getPage(id);
+        page = await collection.getPage(id);
       }
 
       createNode({
