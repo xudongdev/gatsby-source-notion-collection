@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.5.0",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "bluebird": "^3.7.2",
     "lodash": "^4.17.19",
     "rehype-parse": "^7.0.1",
